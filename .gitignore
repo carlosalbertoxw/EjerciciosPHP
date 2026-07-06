@@ -1,5 +1,12 @@
-#Archivos
+# Archivos
 *.orig
 
-#Carpetas
-/nbproject/private/
+# Dependencias de Composer
+/vendor/
+composer.lock
+
+# Archivos generados por los ejercicios (datos de ejemplo temporales)
+/04_archivos/*.txt
+/04_archivos/*.json
+/04_archivos/*.csv
+/09_proyectos/*.json

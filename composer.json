@@ -1,0 +1,9 @@
+{
+    "name": "carlos/ejercicios-php",
+    "description": "Colección de ejercicios básicos de PHP para aprender el lenguaje paso a paso.",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1"
+    }
+}

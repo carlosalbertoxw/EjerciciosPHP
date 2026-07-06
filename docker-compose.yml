@@ -1,0 +1,32 @@
+# Permite ejecutar los ejercicios de PHP sin instalar PHP en tu equipo.
+#
+# Uso rápido:
+#   Ejecutar un ejercicio:   docker compose run --rm php php 01_basico/arrays.php
+#   Abrir una consola PHP:   docker compose run --rm php php -a
+#   Levantar servidor web:   docker compose up web   (luego abre http://localhost:8080)
+#
+# El código se monta dentro del contenedor, así que cualquier cambio que hagas
+# en tus archivos se ve al instante, sin reconstruir nada.
+#
+# Nota: usamos la imagen php:8.4 que ya tienes descargada. Si no la tuvieras,
+# puedes cambiarla por otra como "php:8.4-cli" y Docker la descargará sola.
+
+services:
+  # Servicio para ejecutar ejercicios de línea de comandos (CLI).
+  php:
+    image: php:8.4.23-zts-alpine3.23
+    working_dir: /app
+    volumes:
+      - ./:/app
+
+  # Servicio para los ejercicios que se ven en el navegador (ej. libreria_GD).
+  # Usa el servidor web integrado de PHP, así no necesita descargar Apache.
+  # Se construye a partir del Dockerfile para incluir la extensión GD.
+  web:
+    build: .
+    working_dir: /app
+    command: php -S 0.0.0.0:80 -t /app
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/app
