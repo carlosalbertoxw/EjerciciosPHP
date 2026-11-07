@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Trabajar con JSON
  * -----------------
  * JSON es un formato de texto muy usado para intercambiar datos (APIs, config).
  *   - json_encode: convierte un array/objeto de PHP a texto JSON.
  *   - json_decode: convierte texto JSON de vuelta a datos de PHP.
- * Ejecuta con:  php archivos/leer_json.php
+ * Ejecuta con:  php 04_archivos/leer_json.php
  */
 
 echo '== De PHP a JSON (json_encode) ==' . PHP_EOL;

@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Trabajar con CSV
  * ----------------
  * Un CSV es un archivo de texto donde los datos van separados por comas.
  * Es el formato típico para exportar/importar tablas (Excel, hojas de cálculo).
- * Ejecuta con:  php archivos/leer_csv.php
+ * Ejecuta con:  php 04_archivos/leer_csv.php
  */
 
 $ruta = __DIR__ . '/personas.csv';

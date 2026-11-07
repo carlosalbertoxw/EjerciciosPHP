@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Clases abstractas
  * -----------------
@@ -11,7 +13,7 @@
  *   - métodos abstractos (solo el nombre; cada hija los debe completar).
  *
  * Diferencia con una interfaz: la clase abstracta SÍ puede incluir código.
- * Ejecuta con:  php poo/clases_abstractas.php
+ * Ejecuta con:  php 02_poo/clases_abstractas.php
  */
 
 abstract class Animal {

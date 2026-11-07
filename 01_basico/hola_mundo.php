@@ -9,6 +9,7 @@
  *
  * PHP_EOL es una constante que representa el "salto de línea" del sistema
  * operativo. La usamos para que el texto se vea ordenado en la terminal.
+ * Ejecuta con:  php 01_basico/hola_mundo.php
  */
 
 echo 'Hola Mundo :)' . PHP_EOL;

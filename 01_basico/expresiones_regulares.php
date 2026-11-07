@@ -5,7 +5,7 @@
  * ------------------------------------
  * Una expresión regular es un "patrón" para buscar o validar texto.
  * En PHP se escriben entre delimitadores, normalmente barras: /patrón/
- * Ejecuta con:  php expresiones_regulares.php
+ * Ejecuta con:  php 01_basico/expresiones_regulares.php
  */
 
 echo '== preg_match: ¿el texto cumple el patrón? ==' . PHP_EOL;
@@ -25,6 +25,8 @@ echo $esValido ? 'Código postal válido' : 'No válido';
 echo PHP_EOL;
 
 
+// Solo es un ejemplo de patrón: para validar correos reales usa filter_var,
+// como en 05_formularios/validar_datos.php.
 echo PHP_EOL . '== Validar un email sencillo ==' . PHP_EOL;
 $email = 'correo@ejemplo.com';
 $patronEmail = '/^[^@\s]+@[^@\s]+\.[^@\s]+$/';

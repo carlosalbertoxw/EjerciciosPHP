@@ -4,7 +4,7 @@
  * Operador ternario y "null coalescing"
  * -------------------------------------
  * Son atajos para escribir condiciones cortas en una sola línea.
- * Ejecuta con:  php ternario.php
+ * Ejecuta con:  php 01_basico/ternario.php
  */
 
 echo '== Operador ternario ( condición ? si : no ) ==' . PHP_EOL;

@@ -8,6 +8,7 @@
  *
  * Importante: cada caso debe terminar con "break", si no, PHP seguiría
  * ejecutando los casos siguientes.
+ * Ejecuta con:  php 01_basico/switch.php
  */
 
 $dia = 3;

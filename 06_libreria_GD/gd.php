@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Librería GD: manipular imágenes
  * -------------------------------
@@ -11,88 +13,60 @@
  * resultados abre index.php en el navegador (docker compose up web).
  */
 
-/** Abre una imagen del disco según su tipo (jpg, png o gif) y devuelve el recurso GD. */
-function cargar_imagen(string $ruta) {
+/** Abre una imagen del disco según su tipo (jpg, png o gif). */
+function cargarImagen(string $ruta): GdImage {
     $tipo = getimagesize($ruta)['mime'];
     return match ($tipo) {
-        'image/jpeg', 'image/jpg' => imagecreatefromjpeg($ruta),
-        'image/png'               => imagecreatefrompng($ruta),
-        'image/gif'               => imagecreatefromgif($ruta),
-        default                   => throw new RuntimeException("Tipo de imagen no soportado: $tipo"),
+        'image/jpeg' => imagecreatefromjpeg($ruta),
+        'image/png'  => imagecreatefrompng($ruta),
+        'image/gif'  => imagecreatefromgif($ruta),
+        default      => throw new RuntimeException("Tipo de imagen no soportado: $tipo"),
     };
 }
 
-/** Envía un recurso GD al navegador como JPEG y libera la memoria. */
-function enviar_jpeg($imagen): void {
-    header('Content-type: image/jpeg');
+/** Envía la imagen al navegador como JPEG. PHP libera su memoria automáticamente. */
+function enviarJpeg(GdImage $imagen): void {
+    header('Content-Type: image/jpeg');
     imagejpeg($imagen);
-    imagedestroy($imagen);
 }
 
 
 /**
- * Redimensiona la imagen para que quepa en 200x200 SIN deformarla
- * (mantiene la proporción original).
+ * Redimensiona la imagen para que quepa en 200x200 SIN deformarla: la escala es
+ * la menor de las dos, para que ningún lado se pase del máximo.
  */
-function imagen_proporcional(string $ruta): void {
-    $anchoMax = 200;
-    $altoMax  = 200;
-
+function imagenProporcional(string $ruta): void {
     [$anchoOrig, $altoOrig] = getimagesize($ruta);
-    $proporcionOrig  = $anchoOrig / $altoOrig;
-    $proporcionCaja  = $anchoMax / $altoMax;
+    $escala = min(200 / $anchoOrig, 200 / $altoOrig);
+    $ancho  = (int) round($anchoOrig * $escala);
+    $alto   = (int) round($altoOrig * $escala);
 
-    if ($proporcionOrig > $proporcionCaja) {
-        $ancho = $anchoMax;
-        $alto  = $anchoMax / $proporcionOrig;
-    } elseif ($proporcionOrig < $proporcionCaja) {
-        $ancho = $altoMax * $proporcionOrig;
-        $alto  = $altoMax;
-    } else {
-        $ancho = $anchoMax;
-        $alto  = $altoMax;
-    }
-
-    $original = cargar_imagen($ruta);
-    $lienzo   = imagecreatetruecolor((int) $ancho, (int) $alto);
-    imagecopyresampled($lienzo, $original, 0, 0, 0, 0, (int) $ancho, (int) $alto, $anchoOrig, $altoOrig);
-    enviar_jpeg($lienzo);
+    $lienzo = imagecreatetruecolor($ancho, $alto);
+    imagecopyresampled($lienzo, cargarImagen($ruta), 0, 0, 0, 0, $ancho, $alto, $anchoOrig, $altoOrig);
+    enviarJpeg($lienzo);
 }
 
 
 /**
- * Recorta la imagen a 200x100 centrándola (rellena la caja y corta lo que sobra).
+ * Recorta la imagen a 200x100 centrándola: la escala es la mayor de las dos, para
+ * que la imagen llene la caja, y se copia solo la zona central que cabe en ella.
  */
-function imagen_recortada(string $ruta): void {
+function imagenRecortada(string $ruta): void {
     $ancho = 200;
     $alto  = 100;
 
     [$anchoOrig, $altoOrig] = getimagesize($ruta);
-    $proporcionOrig = $anchoOrig / $altoOrig;
-    $proporcionCaja = $ancho / $alto;
+    $escala = max($ancho / $anchoOrig, $alto / $altoOrig);
 
-    if ($proporcionOrig > $proporcionCaja) {
-        $anchoTmp = $alto * $proporcionOrig;
-        $altoTmp  = $alto;
-    } elseif ($proporcionOrig < $proporcionCaja) {
-        $anchoTmp = $ancho;
-        $altoTmp  = $ancho / $proporcionOrig;
-    } else {
-        $anchoTmp = $ancho;
-        $altoTmp  = $alto;
-    }
+    // Tamaño de la zona de la imagen original que se va a copiar, y su posición.
+    $anchoZona = (int) round($ancho / $escala);
+    $altoZona  = (int) round($alto / $escala);
+    $x = (int) (($anchoOrig - $anchoZona) / 2);
+    $y = (int) (($altoOrig - $altoZona) / 2);
 
-    // Desplazamiento para centrar el recorte.
-    $x = (int) (($anchoTmp - $ancho) / 2);
-    $y = (int) (($altoTmp - $alto) / 2);
-
-    $original    = cargar_imagen($ruta);
-    $lienzo      = imagecreatetruecolor($ancho, $alto);
-    $lienzoTemp  = imagecreatetruecolor((int) $anchoTmp, (int) $altoTmp);
-
-    imagecopyresampled($lienzoTemp, $original, 0, 0, 0, 0, (int) $anchoTmp, (int) $altoTmp, $anchoOrig, $altoOrig);
-    imagecopy($lienzo, $lienzoTemp, 0, 0, $x, $y, $ancho, $alto);
-    enviar_jpeg($lienzo);
+    $lienzo = imagecreatetruecolor($ancho, $alto);
+    imagecopyresampled($lienzo, cargarImagen($ruta), 0, 0, $x, $y, $ancho, $alto, $anchoZona, $altoZona);
+    enviarJpeg($lienzo);
 }
 
 
@@ -100,34 +74,25 @@ function imagen_recortada(string $ruta): void {
  * Ajusta la imagen a 200x200 exactos SIN respetar la proporción
  * (la estira o encoge para llenar toda la caja).
  */
-function imagen_estirada(string $ruta): void {
-    $ancho = 200;
-    $alto  = 200;
-
-    [$anchoOrig, $altoOrig] = getimagesize($ruta);
-
-    $original = cargar_imagen($ruta);
-    $lienzo   = imagecreatetruecolor($ancho, $alto);
-    imagecopyresampled($lienzo, $original, 0, 0, 0, 0, $ancho, $alto, $anchoOrig, $altoOrig);
-    enviar_jpeg($lienzo);
+function imagenEstirada(string $ruta): void {
+    enviarJpeg(imagescale(cargarImagen($ruta), 200, 200));
 }
 
 
 /**
  * Crea una imagen que contiene el texto recibido.
  */
-function imagen_texto(string $texto): void {
-    // imagestring usa la codificación ISO-8859-1; convertimos desde UTF-8
-    // (reemplazo moderno de utf8_decode, que quedó obsoleto en PHP 8).
-    $texto = mb_convert_encoding($texto, 'ISO-8859-1', 'UTF-8');
+function imagenTexto(string $texto): void {
+    // imagestring usa la codificación ISO-8859-1; convertimos desde UTF-8.
+    $texto = mb_convert_encoding(mb_substr($texto, 0, 100), 'ISO-8859-1', 'UTF-8');
 
     $ancho = max(1, strlen($texto) * 9);
     $alto  = 20;
 
-    $imagen  = imagecreate($ancho, $alto);
-    $fondo   = imagecolorallocate($imagen, 255, 255, 255); // blanco
-    $tinta   = imagecolorallocate($imagen, 0, 0, 0);       // negro
+    $imagen = imagecreate($ancho, $alto);
+    $fondo  = imagecolorallocate($imagen, 255, 255, 255); // blanco
+    $tinta  = imagecolorallocate($imagen, 0, 0, 0);       // negro
     imagefill($imagen, 0, 0, $fondo);
     imagestring($imagen, 5, 2, 2, $texto, $tinta);
-    enviar_jpeg($imagen);
+    enviarJpeg($imagen);
 }

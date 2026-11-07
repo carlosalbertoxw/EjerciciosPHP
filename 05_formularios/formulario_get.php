@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Formularios con GET
  * -------------------
@@ -8,7 +11,7 @@
  *
  * Cómo probar:
  *   docker compose up web
- *   abre http://localhost:8080/formularios/formulario_get.php
+ *   abre http://localhost:8080/05_formularios/formulario_get.php
  *   al buscar, fíjate cómo cambia la URL a  ...?q=tu_busqueda
  */
 

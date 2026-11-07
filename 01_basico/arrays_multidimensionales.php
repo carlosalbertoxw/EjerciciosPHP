@@ -5,7 +5,7 @@
  * -------------------------
  * Son arrays que contienen otros arrays. Sirven para representar tablas,
  * listas de registros, etc.
- * Ejecuta con:  php arrays_multidimensionales.php
+ * Ejecuta con:  php 01_basico/arrays_multidimensionales.php
  */
 
 // Una lista de alumnos; cada alumno es un array asociativo.

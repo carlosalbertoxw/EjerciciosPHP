@@ -5,6 +5,7 @@
  * ---------
  * Se usa cuando sabemos CUÁNTAS veces queremos repetir algo.
  * Tiene tres partes: (inicio; condición; paso)
+ * Ejecuta con:  php 01_basico/for.php
  */
 
 // Cuenta del 0 al 10.

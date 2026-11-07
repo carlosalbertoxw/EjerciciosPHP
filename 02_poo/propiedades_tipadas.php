@@ -1,17 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Propiedades tipadas y "constructor promotion" (PHP 8)
  * -----------------------------------------------------
  * Esta es la forma MODERNA de escribir clases, más corta que la clásica.
- * Compárala con poo/herencia/persona.php (versión con getters/setters manuales).
+ * Compárala con 02_poo/herencia.php (versión con getters/setters manuales).
  *
  * Novedades que se muestran aquí:
  *   - Tipos en las propiedades (string, int...): PHP valida que el dato sea correcto.
  *   - Constructor promotion: declarar y asignar las propiedades en el propio
  *     constructor, sin repetirlas arriba.
  *   - readonly: una propiedad que solo se puede asignar una vez (no cambia después).
- * Ejecuta con:  php poo/propiedades_tipadas.php
+ *   - readonly class: hace readonly todas las propiedades de la clase (PHP 8.2).
+ * Ejecuta con:  php 02_poo/propiedades_tipadas.php
  */
 
 class Persona {
@@ -46,3 +49,12 @@ echo 'Nueva edad: ' . $persona->edad . PHP_EOL;
 // El valor por defecto también funciona:
 $otra = new Persona('Ana', 25);
 echo $otra->saludar() . PHP_EOL; // ciudad = Desconocida
+
+// Una clase readonly es ideal para datos que no deben cambiar nunca.
+readonly class Punto {
+    public function __construct(public int $x, public int $y) {
+    }
+}
+
+$punto = new Punto(3, 4);
+echo "Punto: ({$punto->x}, {$punto->y})" . PHP_EOL;

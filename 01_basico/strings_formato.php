@@ -4,7 +4,7 @@
  * Dar formato a textos y números
  * ------------------------------
  * Funciones para presentar la información de forma ordenada.
- * Ejecuta con:  php strings_formato.php
+ * Ejecuta con:  php 01_basico/strings_formato.php
  */
 
 echo '== sprintf: armar un texto con formato ==' . PHP_EOL;

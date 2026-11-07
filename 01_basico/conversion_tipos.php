@@ -5,7 +5,7 @@
  * -----------------------------
  * A veces necesitamos convertir un valor de un tipo a otro.
  * PHP puede hacerlo de forma automática o podemos forzarlo nosotros.
- * Ejecuta con:  php conversion_tipos.php
+ * Ejecuta con:  php 01_basico/conversion_tipos.php
  */
 
 echo '== Convertir a número ==' . PHP_EOL;

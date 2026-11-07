@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Patrón Factory (Fábrica)
  * ------------------------
@@ -11,10 +13,10 @@
  * el resto del código sigue igual.
  *
  * Ejemplo: una fábrica de notificaciones que crea Email o SMS según el tipo.
- * Ejecuta con:  php design_patterns/factory.php
+ * Ejecuta con:  php 07_design_patterns/factory.php
  *
- * (En la carpeta factory/ hay una variante avanzada del mismo patrón que
- *  carga cada clase desde su propio archivo.)
+ * (En 08_avanzado/cargador_dinamico/ hay una variante avanzada del mismo patrón
+ *  que carga cada clase desde su propio archivo.)
  */
 
 // El contrato común: toda notificación sabe enviarse.

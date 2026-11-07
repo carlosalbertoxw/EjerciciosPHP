@@ -6,7 +6,7 @@
  * Dentro de un bucle:
  *   - break:    CORTA el bucle por completo y sale de él.
  *   - continue: SALTA el resto de esta vuelta y pasa a la siguiente.
- * Ejecuta con:  php break_continue.php
+ * Ejecuta con:  php 01_basico/break_continue.php
  */
 
 echo '== break: detener al llegar al 5 ==' . PHP_EOL;

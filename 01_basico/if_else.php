@@ -1,9 +1,10 @@
 <?php
 
 /**
- * Condicionales: if / else if / else
- * -----------------------------------
+ * Condicionales: if / elseif / else
+ * ---------------------------------
  * Sirven para ejecutar un bloque de código solo cuando se cumple una condición.
+ * Ejecuta con:  php 01_basico/if_else.php
  */
 
 $edad = 20;
@@ -20,12 +21,12 @@ if ($edad >= 18) {
     echo 'Todavía no puedes votar' . PHP_EOL;
 }
 
-// if / else if / else: varias condiciones en cadena.
+// if / elseif / else: varias condiciones en cadena.
 $nota = 8;
 
 if ($nota >= 9) {
     echo 'Calificación: Excelente' . PHP_EOL;
-} else if ($nota >= 7) {
+} elseif ($nota >= 7) {
     echo 'Calificación: Aprobado' . PHP_EOL;
 } else {
     echo 'Calificación: Reprobado' . PHP_EOL;

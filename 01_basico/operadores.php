@@ -4,7 +4,7 @@
  * Operadores en PHP
  * -----------------
  * Este ejercicio muestra el RESULTADO de cada operador, no solo su sintaxis.
- * Ejecuta con:  php operadores.php
+ * Ejecuta con:  php 01_basico/operadores.php
  */
 
 echo '== Operadores aritméticos ==' . PHP_EOL;

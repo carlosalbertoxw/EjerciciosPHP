@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Patrón Singleton
  * ----------------
@@ -11,7 +13,7 @@
  *   - el constructor es private (nadie puede hacer "new" desde fuera),
  *   - un método estático getInstancia() crea el objeto la primera vez
  *     y luego siempre devuelve el mismo.
- * Ejecuta con:  php design_patterns/singleton.php
+ * Ejecuta con:  php 07_design_patterns/singleton.php
  */
 
 class Configuracion {
@@ -21,6 +23,10 @@ class Configuracion {
 
     // private: impide crear objetos con "new Configuracion()" desde fuera.
     private function __construct() {
+    }
+
+    // private: impide crear una segunda instancia con "clone".
+    private function __clone(): void {
     }
 
     public static function getInstancia(): Configuracion {

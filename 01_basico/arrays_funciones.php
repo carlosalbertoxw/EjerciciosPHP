@@ -4,7 +4,7 @@
  * Funciones útiles para arrays
  * ----------------------------
  * PHP trae funciones muy potentes para transformar y filtrar listas.
- * Ejecuta con:  php arrays_funciones.php
+ * Ejecuta con:  php 01_basico/arrays_funciones.php
  */
 
 $numeros = [1, 2, 3, 4, 5, 6];

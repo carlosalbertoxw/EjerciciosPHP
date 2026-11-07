@@ -4,7 +4,7 @@
  * Cadenas de texto (strings)
  * --------------------------
  * PHP incluye muchas funciones para trabajar con texto.
- * Ejecuta con:  php strings.php
+ * Ejecuta con:  php 01_basico/strings.php
  */
 
 $texto = 'Hola Mundo';

@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Traits
  * ------
  * Un trait es un conjunto de métodos que podemos "pegar" dentro de varias
  * clases para reutilizar código, incluso si esas clases no están relacionadas
  * por herencia. Se incluyen con la palabra "use" dentro de la clase.
- * Ejecuta con:  php poo/traits.php
+ * Ejecuta con:  php 02_poo/traits.php
  */
 
 // Este trait agrega la capacidad de registrar mensajes.

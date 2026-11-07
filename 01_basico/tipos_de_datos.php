@@ -5,7 +5,7 @@
  * --------------
  * PHP guarda distintos tipos de valores. var_dump() nos dice el tipo y el valor,
  * y gettype() nos da solo el nombre del tipo. Muy útil para depurar.
- * Ejecuta con:  php tipos_de_datos.php
+ * Ejecuta con:  php 01_basico/tipos_de_datos.php
  */
 
 $entero  = 42;          // int    -> número sin decimales

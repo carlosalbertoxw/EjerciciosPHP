@@ -7,26 +7,27 @@
 #
 # El código se monta dentro del contenedor, así que cualquier cambio que hagas
 # en tus archivos se ve al instante, sin reconstruir nada.
-#
-# Nota: usamos la imagen php:8.4 que ya tienes descargada. Si no la tuvieras,
-# puedes cambiarla por otra como "php:8.4-cli" y Docker la descargará sola.
+
+x-comun: &comun
+  build: .
+  image: ejercicios-php:local
+  # Sin root: los archivos que creen los ejercicios quedan a nombre de tu usuario.
+  user: "${UID:-1000}:${GID:-1000}"
+  environment:
+    COMPOSER_HOME: /tmp/composer
+  volumes:
+    - ./:/app
 
 services:
   # Servicio para ejecutar ejercicios de línea de comandos (CLI).
   php:
-    image: php:8.4.23-zts-alpine3.23
-    working_dir: /app
-    volumes:
-      - ./:/app
+    <<: *comun
 
   # Servicio para los ejercicios que se ven en el navegador (ej. libreria_GD).
   # Usa el servidor web integrado de PHP, así no necesita descargar Apache.
-  # Se construye a partir del Dockerfile para incluir la extensión GD.
+  # Solo acepta conexiones desde tu propio equipo.
   web:
-    build: .
-    working_dir: /app
-    command: php -S 0.0.0.0:80 -t /app
+    <<: *comun
+    command: php -S 0.0.0.0:8080 -t /app
     ports:
-      - "8080:80"
-    volumes:
-      - ./:/app
+      - "127.0.0.1:8080:8080"

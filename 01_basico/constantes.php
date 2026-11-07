@@ -5,7 +5,7 @@
  * ----------
  * Una constante es un valor que se define una vez y NO cambia durante el programa.
  * Por convención se escriben en MAYÚSCULAS.
- * Ejecuta con:  php constantes.php
+ * Ejecuta con:  php 01_basico/constantes.php
  */
 
 // Forma 1: con define()

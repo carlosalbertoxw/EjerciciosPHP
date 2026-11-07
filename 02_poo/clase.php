@@ -1,5 +1,9 @@
 <?php
 
+// Con strict_types, PHP no convierte tipos por su cuenta: pasar un texto a un
+// parámetro int es un error. A partir de esta carpeta lo usan todos los ejercicios.
+declare(strict_types=1);
+
 /**
  * Clases y objetos
  * ----------------

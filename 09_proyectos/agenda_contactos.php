@@ -1,65 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Proyecto: Agenda de contactos (CRUD con POO + JSON)
  * ---------------------------------------------------
- * Junta: clases, encapsulamiento, arrays, JSON y archivos.
+ * Junta: clases, encapsulamiento, arrays, excepciones, JSON y archivos.
+ * La clase está en Agenda.php, separada de esta demostración para poder probarla.
  *
  * CRUD = las 4 operaciones básicas sobre datos:
  *   Create (crear), Read (leer), Update (actualizar), Delete (borrar).
  *
  * Los contactos se guardan en un archivo .json, así que persisten aunque
  * cerremos el programa (a diferencia de todo_list.php, que vive en memoria).
- * Ejecuta con:  php proyectos/agenda_contactos.php
+ * Ejecuta con:  php 09_proyectos/agenda_contactos.php
  */
 
-class Agenda {
+require_once __DIR__ . '/Agenda.php';
 
-    private array $contactos = [];
-
-    public function __construct(private string $archivo) {
-        $this->cargar(); // al iniciar, leemos lo que haya en el archivo
-    }
-
-    // CREATE
-    public function agregar(string $nombre, string $telefono): void {
-        $this->contactos[$nombre] = $telefono;
-        $this->guardar();
-    }
-
-    // READ
-    public function buscar(string $nombre): ?string {
-        return $this->contactos[$nombre] ?? null;
-    }
-
-    public function todos(): array {
-        return $this->contactos;
-    }
-
-    // UPDATE (reutiliza agregar, porque sobrescribe si ya existe)
-    public function actualizar(string $nombre, string $telefono): void {
-        $this->agregar($nombre, $telefono);
-    }
-
-    // DELETE
-    public function eliminar(string $nombre): void {
-        unset($this->contactos[$nombre]);
-        $this->guardar();
-    }
-
-    // --- Persistencia en JSON ---
-    private function cargar(): void {
-        if (file_exists($this->archivo)) {
-            $this->contactos = json_decode(file_get_contents($this->archivo), true) ?? [];
-        }
-    }
-
-    private function guardar(): void {
-        file_put_contents($this->archivo, json_encode($this->contactos, JSON_PRETTY_PRINT));
-    }
-}
-
-// --- Demostración ---
 $ruta   = __DIR__ . '/contactos.json';
 $agenda = new Agenda($ruta);
 
@@ -73,6 +31,13 @@ echo 'Teléfono de Ana: ' . $agenda->buscar('Ana') . PHP_EOL;
 // Update
 $agenda->actualizar('Ana', '555-9999');
 echo 'Teléfono de Ana actualizado: ' . $agenda->buscar('Ana') . PHP_EOL;
+
+// Actualizar a alguien que no existe es un error, no crea un contacto nuevo.
+try {
+    $agenda->actualizar('Pedro', '555-0000');
+} catch (InvalidArgumentException $e) {
+    echo 'Error: ' . $e->getMessage() . PHP_EOL;
+}
 
 // Delete
 $agenda->eliminar('Luis');

@@ -6,7 +6,7 @@
  * Una función es un bloque de código con nombre que podemos reutilizar.
  * Recibe datos de entrada (parámetros) y normalmente devuelve un resultado
  * con "return".
- * Ejecuta con:  php funciones.php
+ * Ejecuta con:  php 01_basico/funciones.php
  */
 
 // Función que recibe un nombre y devuelve un saludo.

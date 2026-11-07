@@ -4,7 +4,7 @@
  * Arrays (listas)
  * ---------------
  * Un array guarda varios valores dentro de una sola variable.
- * Ejecuta con:  php arrays.php
+ * Ejecuta con:  php 01_basico/arrays.php
  */
 
 echo '== Array simple (indexado) ==' . PHP_EOL;

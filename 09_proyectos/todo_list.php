@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Proyecto: Lista de tareas (en memoria)
  * --------------------------------------
@@ -8,7 +10,7 @@
  * Guardamos las tareas en un array. Cada tarea es un array con su texto y si
  * está completada o no. Como no usamos base de datos, los datos viven solo
  * mientras corre el script (en memoria).
- * Ejecuta con:  php proyectos/todo_list.php
+ * Ejecuta con:  php 09_proyectos/todo_list.php
  */
 
 // El array de tareas se pasa por referencia (&) para poder modificarlo.

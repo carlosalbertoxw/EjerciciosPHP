@@ -7,7 +7,7 @@
  *   - devuelve un valor directamente (podemos asignarlo a una variable),
  *   - compara de forma estricta (=== , compara valor Y tipo),
  *   - no necesita "break".
- * Ejecuta con:  php match.php
+ * Ejecuta con:  php 01_basico/match.php
  */
 
 $codigo = 404;

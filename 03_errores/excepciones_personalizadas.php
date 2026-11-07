@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Excepciones personalizadas
  * --------------------------
  * Podemos crear nuestros propios tipos de error extendiendo la clase Exception.
  * Así el código queda más claro y podemos capturar cada tipo por separado.
- * Ejecuta con:  php errores/excepciones_personalizadas.php
+ * Ejecuta con:  php 03_errores/excepciones_personalizadas.php
  */
 
 // Nuestra propia excepción: hereda todo de Exception.

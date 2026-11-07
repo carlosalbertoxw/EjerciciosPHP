@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Encapsulamiento y Herencia
  * --------------------------
@@ -8,12 +10,12 @@
  * 1) ENCAPSULAMIENTO: las propiedades son "private", así que solo se pueden ver
  *    o cambiar desde DENTRO de la clase. Para usarlas desde fuera creamos
  *    métodos públicos:
- *      - los "set_" (setters) sirven para ASIGNAR un valor.
- *      - los "get_" (getters) sirven para LEER un valor.
+ *      - los "set" (setters) sirven para ASIGNAR un valor.
+ *      - los "get" (getters) sirven para LEER un valor.
  *    Así la clase controla cómo se usan sus datos.
  *
  * 2) HERENCIA: con "extends", la clase Alumno HEREDA todo lo de Persona
- *    (propiedades y métodos) y además agrega lo suyo (numero_control).
+ *    (propiedades y métodos) y además agrega lo suyo (numeroControl).
  *    Se reutiliza código sin repetirlo: un Alumno ES una Persona.
  *
  * (Para la versión moderna y más corta de una clase, mira propiedades_tipadas.php)
@@ -29,43 +31,43 @@ class Persona {
     private $edad;
     private $sexo;
 
-    public function set_cve($cve) {
+    public function setCve($cve) {
         $this->cve = $cve;
     }
 
-    public function set_nombre($nombre) {
+    public function setNombre($nombre) {
         $this->nombre = $nombre;
     }
 
-    public function set_apellido($apellido) {
+    public function setApellido($apellido) {
         $this->apellido = $apellido;
     }
 
-    public function set_edad($edad) {
+    public function setEdad($edad) {
         $this->edad = $edad;
     }
 
-    public function set_sexo($sexo) {
+    public function setSexo($sexo) {
         $this->sexo = $sexo;
     }
 
-    public function get_cve() {
+    public function getCve() {
         return $this->cve;
     }
 
-    public function get_nombre() {
+    public function getNombre() {
         return $this->nombre;
     }
 
-    public function get_apellido() {
+    public function getApellido() {
         return $this->apellido;
     }
 
-    public function get_edad() {
+    public function getEdad() {
         return $this->edad;
     }
 
-    public function get_sexo() {
+    public function getSexo() {
         return $this->sexo;
     }
 }
@@ -73,14 +75,14 @@ class Persona {
 // Clase "hija": hereda de Persona y añade lo propio de un alumno.
 class Alumno extends Persona {
 
-    private $numero_control;
+    private $numeroControl;
 
-    public function set_numero_control($numero_control) {
-        $this->numero_control = $numero_control;
+    public function setNumeroControl($numeroControl) {
+        $this->numeroControl = $numeroControl;
     }
 
-    public function get_numero_control() {
-        return $this->numero_control;
+    public function getNumeroControl() {
+        return $this->numeroControl;
     }
 }
 
@@ -88,18 +90,18 @@ class Alumno extends Persona {
 $alumno = new Alumno();
 
 // Métodos heredados de Persona:
-$alumno->set_nombre('Carlos');
-$alumno->set_apellido('Sánchez');
-$alumno->set_edad(30);
-$alumno->set_sexo('masculino');
-$alumno->set_cve(1);
+$alumno->setNombre('Carlos');
+$alumno->setApellido('Sánchez');
+$alumno->setEdad(30);
+$alumno->setSexo('masculino');
+$alumno->setCve(1);
 
 // Método propio de Alumno:
-$alumno->set_numero_control(1409011110);
+$alumno->setNumeroControl(1409011110);
 
-echo 'Nombre: '   . $alumno->get_nombre()          . PHP_EOL;
-echo 'Apellido: ' . $alumno->get_apellido()        . PHP_EOL;
-echo 'Edad: '     . $alumno->get_edad()            . PHP_EOL;
-echo 'Sexo: '     . $alumno->get_sexo()            . PHP_EOL;
-echo 'NC: '       . $alumno->get_numero_control()  . PHP_EOL;
-echo 'Clave: '    . $alumno->get_cve()             . PHP_EOL;
+echo 'Nombre: '   . $alumno->getNombre()          . PHP_EOL;
+echo 'Apellido: ' . $alumno->getApellido()        . PHP_EOL;
+echo 'Edad: '     . $alumno->getEdad()            . PHP_EOL;
+echo 'Sexo: '     . $alumno->getSexo()            . PHP_EOL;
+echo 'NC: '       . $alumno->getNumeroControl()  . PHP_EOL;
+echo 'Clave: '    . $alumno->getCve()             . PHP_EOL;

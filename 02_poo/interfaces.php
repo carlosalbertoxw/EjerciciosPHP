@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Interfaces (introducción)
  * -------------------------
@@ -8,27 +10,22 @@
  *
  * Ventaja: podemos tratar por igual a objetos distintos mientras cumplan
  * el mismo contrato (todos saben calcular su "area").
- * Ejecuta con:  php poo/interfaces.php
+ * Ejecuta con:  php 02_poo/interfaces.php
  */
 
 // El contrato: toda Figura debe saber calcular su área.
 interface Figura {
-    public function area();
+    public function area(): float;
 }
 
 // Rectangulo cumple el contrato con "implements Figura".
 class Rectangulo implements Figura {
 
-    public $base;
-    public $altura;
-
-    public function __construct($base, $altura) {
-        $this->base = $base;
-        $this->altura = $altura;
+    public function __construct(public float $base, public float $altura) {
     }
 
     // Su forma propia de calcular el área.
-    public function area() {
+    public function area(): float {
         return $this->base * $this->altura;
     }
 }
@@ -36,14 +33,11 @@ class Rectangulo implements Figura {
 // Circulo también cumple el contrato, pero calcula el área a su manera.
 class Circulo implements Figura {
 
-    public $radio;
-
-    public function __construct($radio) {
-        $this->radio = $radio;
+    public function __construct(public float $radio) {
     }
 
-    public function area() {
-        return 3.1416 * $this->radio ** 2;
+    public function area(): float {
+        return M_PI * $this->radio ** 2;
     }
 }
 

@@ -4,7 +4,7 @@
  * Funciones avanzadas
  * -------------------
  * Formas más flexibles de trabajar con funciones.
- * Ejecuta con:  php funciones_avanzadas.php
+ * Ejecuta con:  php 01_basico/funciones_avanzadas.php
  */
 
 echo '== Paso por referencia (&) ==' . PHP_EOL;

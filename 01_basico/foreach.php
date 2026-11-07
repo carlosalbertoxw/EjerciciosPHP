@@ -5,6 +5,7 @@
  * -------------
  * Es la forma más cómoda de recorrer un array (una lista de valores).
  * No necesitamos un contador: PHP recorre todos los elementos por nosotros.
+ * Ejecuta con:  php 01_basico/foreach.php
  */
 
 $colores = ['rojo', 'verde', 'azul'];

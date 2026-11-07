@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Constantes y miembros estáticos
  * -------------------------------
@@ -8,12 +10,12 @@
  *
  * Para acceder a constantes y miembros estáticos se usa :: (no ->),
  * porque no necesitamos crear un objeto con "new".
- * Ejecuta con:  php poo/constantes_y_estaticos.php
+ * Ejecuta con:  php 02_poo/constantes_y_estaticos.php
  */
 class Configuracion {
 
-    // Constante: su valor nunca cambia.
-    const VERSION = '1.0';
+    // Constante con tipo (PHP 8.3): su valor nunca cambia.
+    const string VERSION = '1.0';
 
     // Propiedad estática: es COMPARTIDA por toda la clase (una sola copia).
     public static $contadorUsuarios = 0;

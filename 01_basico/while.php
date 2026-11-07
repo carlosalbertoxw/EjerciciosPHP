@@ -5,6 +5,7 @@
  * -----------
  * Repite un bloque MIENTRAS la condición sea verdadera.
  * La condición se comprueba ANTES de cada vuelta.
+ * Ejecuta con:  php 01_basico/while.php
  */
 
 $x = 20;

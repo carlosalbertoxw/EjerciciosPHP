@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Patrón Strategy (Estrategia)
  * ----------------------------
@@ -9,7 +11,7 @@
  * Ejemplo: una tienda que calcula el precio final aplicando distintos
  * descuentos (sin descuento, por porcentaje, cliente VIP). Podemos cambiar
  * la estrategia sin tocar la clase que la usa.
- * Ejecuta con:  php design_patterns/strategy.php
+ * Ejecuta con:  php 07_design_patterns/strategy.php
  */
 
 // El contrato común a todas las estrategias de descuento.

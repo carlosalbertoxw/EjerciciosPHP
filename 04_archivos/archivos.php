@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Leer y escribir archivos de texto
  * ---------------------------------
  * PHP puede crear, leer y modificar archivos del disco.
- * Ejecuta con:  php archivos/archivos.php
+ * Ejecuta con:  php 04_archivos/archivos.php
  *
  * __DIR__ es la carpeta donde está este archivo. La usamos para guardar
  * el ejemplo junto a él sin importar desde dónde ejecutemos el script.

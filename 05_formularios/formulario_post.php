@@ -1,4 +1,7 @@
 <?php
+
+declare(strict_types=1);
+
 /**
  * Formularios con POST
  * --------------------
@@ -7,10 +10,11 @@
  *
  * Cómo probar:
  *   docker compose up web
- *   abre http://localhost:8080/formularios/formulario_post.php
+ *   abre http://localhost:8080/05_formularios/formulario_post.php
  *
  * IMPORTANTE (seguridad): nunca confíes en lo que escribe el usuario.
- *   - htmlspecialchars() evita que inyecten HTML/JavaScript (ataque XSS).
+ *   - htmlspecialchars() evita que inyecten HTML/JavaScript (ataque XSS). Se usa
+ *     justo al imprimir, y una sola vez: aplicarlo dos veces mostraría O&#039;Brien.
  *   - ?? '' da un valor por defecto si el campo no vino.
  */
 
@@ -26,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($nombre === '') {
         $mensaje = 'Por favor escribe tu nombre.';
     } else {
-        // htmlspecialchars protege contra código malicioso en el nombre.
-        $mensaje = '¡Hola, ' . htmlspecialchars($nombre) . '! Formulario recibido.';
+        // Aquí NO se escapa: htmlspecialchars se aplica una sola vez, al imprimir.
+        $mensaje = "¡Hola, $nombre! Formulario recibido.";
     }
 }
 ?>

@@ -2,8 +2,8 @@
 
 Colección de ejercicios sencillos para aprender **PHP** paso a paso, desde lo más
 básico (variables, bucles, condicionales) hasta programación orientada a objetos,
-patrones de diseño y pequeños proyectos integradores. Cada archivo es autónomo,
-está muy comentado y al ejecutarlo muestra su resultado en pantalla.
+patrones de diseño, bases de datos y pequeños proyectos integradores. Cada archivo es
+autónomo, está muy comentado y al ejecutarlo muestra su resultado en pantalla.
 
 Las carpetas están numeradas siguiendo el orden de estudio sugerido: empieza por
 `01_basico/` y avanza hacia arriba.
@@ -12,15 +12,23 @@ Las carpetas están numeradas siguiendo el orden de estudio sugerido: empieza po
 
 Necesitas **una** de estas dos opciones:
 
-- **PHP 8** instalado en tu equipo, o
+- **PHP 8.5** instalado en tu equipo, con las extensiones `gd`, `mbstring` y `pdo_sqlite`, o
 - **Docker** (para ejecutar los ejercicios sin instalar PHP). Ver más abajo.
 
 ## Cómo ejecutar los ejercicios
+
+Todos los comandos se ejecutan desde la raíz del repositorio.
 
 ### Opción A — con PHP instalado
 
 ```bash
 php 01_basico/arrays.php
+```
+
+Para los ejercicios del navegador:
+
+```bash
+php -S localhost:8080
 ```
 
 ### Opción B — con Docker (sin instalar PHP)
@@ -39,7 +47,7 @@ docker compose up web
 # luego abre http://localhost:8080
 ```
 
-La primera vez Docker descargará la imagen de PHP; después queda en caché y es
+La primera vez Docker construirá la imagen de PHP; después queda en caché y es
 instantáneo.
 
 ## Contenido
@@ -52,7 +60,7 @@ instantáneo.
 | [constantes.php](01_basico/constantes.php) | Constantes con `define()` y `const` |
 | [operadores.php](01_basico/operadores.php) | Operadores aritméticos, comparación, lógicos y asignación |
 | [conversion_tipos.php](01_basico/conversion_tipos.php) | Casting y comparación `==` vs `===` |
-| [if_else.php](01_basico/if_else.php) | Condicionales `if` / `else if` / `else` |
+| [if_else.php](01_basico/if_else.php) | Condicionales `if` / `elseif` / `else` |
 | [ternario.php](01_basico/ternario.php) | Operador ternario y null coalescing (`??`) |
 | [switch.php](01_basico/switch.php) | Estructura `switch` |
 | [match.php](01_basico/match.php) | Estructura `match` (PHP 8) |
@@ -69,9 +77,11 @@ instantáneo.
 | [strings.php](01_basico/strings.php) | Manejo de cadenas de texto |
 | [strings_formato.php](01_basico/strings_formato.php) | `sprintf`, `number_format`, `str_pad`... |
 | [expresiones_regulares.php](01_basico/expresiones_regulares.php) | `preg_match` / `preg_replace` |
-| [fechas.php](01_basico/fechas.php) | Fechas y horas con `date()` y `DateTime` |
+| [fechas.php](01_basico/fechas.php) | Fechas y horas con `date()` y `DateTimeImmutable` |
 
 ### 📘 `02_poo/` — Programación Orientada a Objetos
+A partir de esta carpeta, todos los ejercicios usan `declare(strict_types=1)`.
+
 | Archivo | Tema |
 |---|---|
 | [clase.php](02_poo/clase.php) | Definir una clase, constructor, propiedades y métodos |
@@ -80,12 +90,12 @@ instantáneo.
 | [interfaces.php](02_poo/interfaces.php) | Interfaces como "contrato" entre clases |
 | [clases_abstractas.php](02_poo/clases_abstractas.php) | Clases y métodos `abstract` |
 | [traits.php](02_poo/traits.php) | Reutilizar métodos con `trait` |
-| [propiedades_tipadas.php](02_poo/propiedades_tipadas.php) | Tipos, `constructor promotion` y `readonly` (PHP 8) |
+| [propiedades_tipadas.php](02_poo/propiedades_tipadas.php) | Tipos, `constructor promotion` y `readonly` |
 
 ### 🧩 `03_errores/` — Manejo de errores
 | Archivo | Tema |
 |---|---|
-| [try_catch.php](03_errores/try_catch.php) | `try` / `catch` / `finally` y `throw` |
+| [try_catch.php](03_errores/try_catch.php) | `try` / `catch` / `finally`, `throw` y `Error` frente a `Exception` |
 | [excepciones_personalizadas.php](03_errores/excepciones_personalizadas.php) | Crear tu propia clase de excepción |
 
 ### 🗂️ `04_archivos/` — Lectura y escritura de archivos
@@ -100,8 +110,10 @@ instantáneo.
 |---|---|
 | [formulario_post.php](05_formularios/formulario_post.php) | Leer `$_POST` y protegerse de XSS |
 | [formulario_get.php](05_formularios/formulario_get.php) | Leer `$_GET` (un buscador) |
+| [validar_datos.php](05_formularios/validar_datos.php) | Validar en el servidor con `filter_var` |
+| [sesion_contador.php](05_formularios/sesion_contador.php) | Recordar datos entre visitas con sesiones |
 
-> Estos se ven en el navegador: `docker compose up web` → http://localhost:8080/05_formularios/
+> Estos se ven en el navegador: levanta el servidor y entra desde el índice en http://localhost:8080
 
 ### 🖼️ `06_libreria_GD/` — Imágenes con la librería GD
 | Archivo | Tema |
@@ -110,7 +122,7 @@ instantáneo.
 | [gd.php](06_libreria_GD/gd.php) | Funciones GD: redimensionar, recortar, estirar y generar texto |
 | [visor.php](06_libreria_GD/visor.php) | Router que devuelve cada imagen ya transformada |
 
-> Se ven en el navegador: `docker compose up web` → http://localhost:8080/06_libreria_GD/
+> Se ven en el navegador: http://localhost:8080/06_libreria_GD/
 > Requiere la extensión **GD**, que el `Dockerfile` incluido ya instala automáticamente.
 
 ### 📙 `07_design_patterns/` — Patrones de diseño
@@ -124,17 +136,49 @@ instantáneo.
 ### 🧠 `08_avanzado/` — Ejemplos avanzados
 | Archivo | Tema |
 |---|---|
-| [cargador_dinamico/ejemplo.php](08_avanzado/cargador_dinamico/ejemplo.php) | Cargar clases desde archivos por su nombre (idea detrás de los autoloaders/MVC) |
+| [cargador_dinamico/ejemplo.php](08_avanzado/cargador_dinamico/ejemplo.php) | Autoload con `spl_autoload_register` y lista permitida (la idea detrás de los frameworks MVC) |
 
 ### 🚀 `09_proyectos/` — Proyectos integradores
 | Archivo | Descripción |
 |---|---|
 | [calculadora.php](09_proyectos/calculadora.php) | Calculadora por línea de comandos (usa `$argv`) |
 | [todo_list.php](09_proyectos/todo_list.php) | Lista de tareas en memoria |
-| [agenda_contactos.php](09_proyectos/agenda_contactos.php) | CRUD de contactos con POO + JSON |
+| [agenda_contactos.php](09_proyectos/agenda_contactos.php) | CRUD de contactos con POO + JSON (clase en [Agenda.php](09_proyectos/Agenda.php)) |
+
+### ✨ `10_php_moderno/` — PHP moderno
+| Archivo | Tema |
+|---|---|
+| [enums.php](10_php_moderno/enums.php) | Enumeraciones |
+| [namespaces.php](10_php_moderno/namespaces.php) | Espacios de nombres |
+| [atributos.php](10_php_moderno/atributos.php) | Atributos, `#[Override]` y Reflection |
+| [argumentos_con_nombre.php](10_php_moderno/argumentos_con_nombre.php) | Argumentos con nombre y operador `?->` |
+| [generadores.php](10_php_moderno/generadores.php) | Generadores con `yield` |
+| [property_hooks.php](10_php_moderno/property_hooks.php) | Property hooks y visibilidad asimétrica (PHP 8.4) |
+| [novedades_recientes.php](10_php_moderno/novedades_recientes.php) | `array_find` (PHP 8.4) y operador pipe `\|>` (PHP 8.5) |
+
+### 🗄️ `11_base_de_datos/` — Bases de datos y contraseñas
+| Archivo | Tema |
+|---|---|
+| [pdo_sqlite.php](11_base_de_datos/pdo_sqlite.php) | CRUD con PDO, consultas preparadas, inyección SQL y transacciones |
+| [contrasenas.php](11_base_de_datos/contrasenas.php) | `password_hash` y `password_verify` |
 
 ## Recomendación de estudio
 
 Sigue las carpetas en el orden en que están numeradas: `01_basico` → `02_poo` →
 `03_errores` → `04_archivos` → `05_formularios` → `06_libreria_GD` →
-`07_design_patterns` → `08_avanzado` → `09_proyectos`.
+`07_design_patterns` → `08_avanzado` → `09_proyectos` → `10_php_moderno` →
+`11_base_de_datos`.
+
+## Pruebas
+
+Las pruebas usan PHPUnit: ejecutan todos los ejercicios de consola, levantan el servidor
+integrado para probar los del navegador y comprueban la clase `Agenda`.
+
+```bash
+docker compose run --rm php composer install
+docker compose run --rm php vendor/bin/phpunit
+```
+
+## Licencia
+
+[MIT](LICENSE)
